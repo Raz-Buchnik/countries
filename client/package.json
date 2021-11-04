@@ -1,0 +1,32 @@
+{
+  "name": "countries",
+  "version": "1.0.0",
+  "main": "dist/index.html",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "build": "npm test && parcel build src/index.html",
+    "test": "jest"
+  },
+  "author": "Raz Buchnik",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/config": "^0.0.38",
+    "@types/jest": "^26.0.22",
+    "@types/parcel-env": "^0.0.0",
+    "@types/react-dom": "^17.0.3",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.4",
+    "ts-node-dev": "^1.1.6"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@risingstack/react-easy-state": "^6.3.0",
+    "axios": "^0.21.1",
+    "config": "^3.3.6",
+    "parcel": "^2.0.0-beta.2",
+    "query-string": "^7.0.0",
+    "razaviv-countries-common": "^1.0.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
