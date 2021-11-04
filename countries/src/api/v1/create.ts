@@ -9,14 +9,14 @@ createController.post('/', async (req: Request<any, any, Country>, res: Response
   try {
     
     res.json(
-      new CastSuccess({
-        data: await create({
+      new CastSuccess(
+        await create({
           country_data: req.body,
           meta: {
             iat: new Date()
           }
         })
-      })
+      )
     )
 
   } catch (err) {

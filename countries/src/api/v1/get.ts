@@ -8,9 +8,9 @@ getController.get('/', async (req: Request, res: Response, next: NextFunction) =
   try {
     
     res.json(
-      new CastSuccess({
-        data: await get()
-      })
+      new CastSuccess(
+        await get()
+      )
     )
 
   } catch (err) {

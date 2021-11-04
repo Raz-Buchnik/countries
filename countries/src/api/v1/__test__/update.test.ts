@@ -2,7 +2,7 @@ import { Country } from 'razaviv-countries-common'
 import request from 'supertest'
 import { app } from '../../../setup'
 
-it('should get list of countries', async () => {
+it('should update a country flag', async () => {
 
   // build country
   const country: Country = {
@@ -16,18 +16,24 @@ it('should get list of countries', async () => {
   }
 
   // request
-  await request(app)
+  const insert = await request(app)
   .post(`/v1`)
   .set('accept-language', 'en-US')
   .send(country)
   .expect(200)
 
-  // request
-  const res = await request(app)
-  .get(`/v1`)
+  const { countryEntity } = insert.body.data
+  const _country = countryEntity._id
+
+  // update request
+  country.flag = 'some flag'
+
+  const update = await request(app)
+  .patch(`/v1/${_country}`)
   .set('accept-language', 'en-US')
+  .send(country)
   .expect(200)
 
-  expect(res.body.data.country_entities[0].name).toBe('Israel')
+  expect(update.body.data.country_entity.flag).toBe('some flag')
 
 })
