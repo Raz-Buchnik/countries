@@ -23,7 +23,7 @@ const Wrapper = () => {
   const classes = useStyles()
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{marginBottom: '70px'}}>
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>

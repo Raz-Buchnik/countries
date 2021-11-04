@@ -1,11 +1,31 @@
 import React, { useEffect } from 'react'
 import { view } from '@risingstack/react-easy-state'
-import { Grid, List, ListItem } from '@material-ui/core'
+import { Button, Grid, List, ListItem, TextField } from '@material-ui/core'
 import { countries } from '../stores'
-import { Header, AddCountry } from './'
+import { Header } from './'
 import { CountryEntity } from 'razaviv-countries-common'
 
 const MainWrapper = () => {
+
+  const changed = e => {
+    const { name, value } = e.target
+    if (name !== 'coord') {
+      return countries.forms.create[name] = value
+    }
+    const [lat, lng] = value.split(",")
+    countries.forms.create['coord'] = {
+      lat,
+      lng
+    }
+  }
+
+  const saved = async () => {
+    try {
+      await countries.create()
+    } catch (err) {
+      console.log(`[err]:`, err)
+    }
+  }
 
   useEffect(() => {
     (async () => {
@@ -17,7 +37,41 @@ const MainWrapper = () => {
     <React.Fragment>
       <Grid container spacing={3}>
         <Header />
-        <Grid item xs={12} style={{marginTop: '70px'}}>
+
+        a<br /> 
+        <Grid item xs={12}>
+          <TextField
+            name="name"
+            label="country name"
+            variant="outlined"
+            onChange={changed}
+          />
+          <TextField
+            name="code"
+            label="country code"
+            variant="outlined"
+            onChange={changed}
+          />
+          <TextField
+            name="flag"
+            label="country flag"
+            variant="outlined"
+            onChange={changed}
+          />
+          <TextField
+            name="coord"
+            label="country coord"
+            variant="outlined"
+            onChange={changed}
+          />
+          <Button
+            variant="outlined"
+            onClick={saved}>
+            Save
+          </Button>
+        </Grid>
+
+        <Grid item xs={12}>
           <List>
             {
               countries.data.map((country: CountryEntity, index: number) => {
@@ -35,8 +89,6 @@ const MainWrapper = () => {
           </List>
         </Grid>
       </Grid>
-
-      <AddCountry />
     </React.Fragment>
   ) : (
     <h1>
